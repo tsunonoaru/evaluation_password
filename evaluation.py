@@ -1,57 +1,37 @@
-password = input("Введите пароль: ")
-
-
 def is_very_long(password):
-	score = 0
-	if len(password) > 12:
-		score += 2
-		return score
-	return score
+    return (len(password) > 12) * 2
 
 
 def has_digit(password):
-	score = 0
-	if any(char.isdigit() for char in password):
-		score += 2
-		return score
-	return score		
+    return 2 if any(char.isdigit() for char in password) else 0
 
 
 def has_upper_letters(password):
-	score = 0
-	if any(char.isupper() for char in password):
-		score += 2
-		return score
-	return score
+    return 2 if any(char.isupper() for char in password) else 0
 
 
 def has_lower_letters(password):
-	score = 0
-	if any(lower.islower() for lower in password):
-		score += 2
-		return score
-	return score		
+    return 2 if any(char.islower() for char in password) else 0
 
 
 def has_symbols(password):
-	score = 0
-	if any(not char.isdigit() and not char.isalpha() for char in password):
-	    score += 2
-	    return score
-	return score    
-		
+    return 2 if any(not char.isdigit() and not char.isalpha() for char in password) else 0
 
-function = [
-    is_very_long,
-    has_digit,
-    has_upper_letters,
-    has_lower_letters,
-    has_symbols,
-]
 
-total_score = 0
+if __name__ == "__main__":
+    password = input("Введите пароль: ")
 
-for char in function:
-	total_score += char(password)
+    functions = [
+        is_very_long,
+        has_digit,
+        has_upper_letters,
+        has_lower_letters,
+        has_symbols,
+    ]
 
-print("Рейтинг пароля:",total_score)	
+    score = 0
+
+    for func in functions:
+        score += func(password)
+
+    print("Рейтинг пароля:", score)
